@@ -5,18 +5,31 @@
 {% block body %}
     {% include 'include/navbar.html' %}
 
+   <div id="hiddenBlock" class="hidden-block">
+        {% include 'include/cart.html' %}
+    </div>
+
     <h1>All Products</h1>
     <ul>
+        <div class="products-group">
         {% for product in products %}
-            <li>
-                <a href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a> - ${{ product.price }}
-                <p>Price: {{ product.price }}</p>
-                <p>Brand: {{ product.product_brand }}</p>
-                <!-- Add other product details as needed -->
-            </li>
-        {% endfor %}
+            <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
+                <div class="sellers-box-img"
+                     style="background: url({{ product.image1.url }});">
+                </div>
+                <div class="sellers-box-bottom">
+                    <div class="sellers-box-t">
+                        <div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div>
+                        <button class="addToCartBtn" data-menu-item="{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="sellers-box-b">
+                        <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </ul>
-
 
     {% include 'include/footer.html' %}
 
