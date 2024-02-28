@@ -1,0 +1,152 @@
+<!-- pages/product_detail.html -->
+{% extends '_base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block body %}
+    {% include 'include/navbar.html' %}
+
+    <div id="hiddenBlock" class="hidden-block">
+        {% include 'include/cart.html' %}
+    </div>
+
+    <section>
+        <div class="detail">
+            <div class="detail-content">
+                <div class="detail-top">
+                    <div class="detail-img">
+                        <div class="detail-img-more">
+                            <ul>
+                                <li><button
+                                        onclick="changeImage('{{ product.image1.url }}')"><img
+                                            src="{{ product.image1.url }}"
+                                            alt="1"></button></li>
+                                <li><button
+                                        onclick="changeImage('{{ product.image2.url }}')"><img
+                                            src="{{ product.image2.url }}"
+                                            alt="2"></button></li>
+                                <li><button
+                                        onclick="changeImage('{{ product.image3.url }}')"><img
+                                            src="{{ product.image3.url }}"
+                                            alt="3"></button></li>
+                                <li><button
+                                        onclick="changeImage('{{ product.image4.url }}')"><img
+                                            src="{{ product.image4.url }}" alt="4"></button></li>
+                            </ul>
+                        </div>
+                        <div class="detail-img-main">
+                            <img id="mainImage" src="{{ product.image1.url }}"
+                                alt="1">
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title-detail">{{ product.header }}</div>
+                        <div class="product-order">
+                            <div class="inline-detail product-availability">
+                                <p>AVAILABILITY:</p>
+                                {% if product.in_stock %}
+                                    <span style="color: #1AB5A2;">IN STOCK</span>
+                                {% else %}
+                                    <span style="color: #FF0000;">OUT OF STOCK</span>
+                                {% endif %}
+                            </div>
+<!--                            <div class="inline-detail product-qty">-->
+<!--                                <p>QTY:</p>-->
+<!--                                <div class="cart-product-quantity inline-detail">-->
+<!--                                    <button class="quantity-btn" data-type="decrease"><i-->
+<!--                                            class="fa-solid fa-minus"></i></button>-->
+<!--                                    <span class="quantity">1</span>-->
+<!--                                    <button class="quantity-btn" data-type="increase"><i-->
+<!--                                            class="fa-solid fa-plus"></i></button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <div class="inline-detail" style="margin-top: 14px;">
+                                <div class="product-price-detail">${{ product.price }}</div>
+                                <button class="add-cart-detail add-to-cart-btn" data-product-id="{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="available-colors">
+                                <h4>Available colors</h4>
+                                <div class="inline-detail">
+                                    {% for color in product.colors.all %}
+                                        <div class="detail-color" style="background: #{{ color.hex_code }};"></div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-description">
+                    <h1>Product description</h1>
+                    <p>{{ product.description }}</p>
+                </div>
+
+                <div class="detail-most-like">
+                    <h1>MORE FROM THIS COLLECTION</h1>
+                    <div class="products-group">
+                        <div class="product-box">
+                            <div class="sellers-box-img"
+                                style="background: url(./assets/young-father-walking-with-baby-carriage-park.jpg);">
+                            </div>
+                            <div class="sellers-box-bottom">
+                                <div class="sellers-box-t">
+                                    <div class="sellers-box-price">$18</div>
+                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="sellers-box-b">
+                                    <div class="sellers-box-title">Whirly Pop</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-box">
+                            <div class="sellers-box-img"
+                                style="background: url(./assets/two-young-mothers-walking-autumn-park-with-carriages.jpg);">
+                            </div>
+                            <div class="sellers-box-bottom">
+                                <div class="sellers-box-t">
+                                    <div class="sellers-box-price">$18</div>
+                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="sellers-box-b">
+                                    <div class="sellers-box-title">Whirly Pop</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-box">
+                            <div class="sellers-box-img"
+                                style="background: url(./assets/young-mother-walking-autumn-park-with-carriage.jpg);">
+                            </div>
+                            <div class="sellers-box-bottom">
+                                <div class="sellers-box-t">
+                                    <div class="sellers-box-price">$38</div>
+                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="sellers-box-b">
+                                    <div class="sellers-box-title">Whirly wheel Test</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-box">
+                            <div class="sellers-box-img"
+                                style="background: url(./assets/young-mother-walking-with-baby-stroller-park.jpg);">
+                            </div>
+                            <div class="sellers-box-bottom">
+                                <div class="sellers-box-t">
+                                    <div class="sellers-box-price">$28</div>
+                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="sellers-box-b">
+                                    <div class="sellers-box-title">Kunert - MILA</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'include/footer.html' %}
+
+{% endblock %}

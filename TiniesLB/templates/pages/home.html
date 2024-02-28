@@ -1,0 +1,221 @@
+<!-- pages/home.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block body %}
+   {% include 'include/navbar.html' %}
+
+    <div id="hiddenBlock" class="hidden-block">
+        {% include 'include/cart.html' %}
+    </div>
+
+
+    <header>
+        <div class="header">
+            <div class="header-content">
+                <div class="header-info">
+                    <div class="header-title">Playful Toys, Healing Tools</div>
+                    <div class="header-subtitle">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <div class="header-btn">
+                        <a href="{% url 'all' %}">Explore our products</a>
+                    </div>
+                </div>
+                <div class="header-img"><img src="{% static '/assets/giraffe-header.png' %}" alt="girrafe"></div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="category">
+            <div class="category-content">
+                <div class="category-title">Categories features</div>
+                <div class="category-box-group">
+                    <div class="category-box">
+                        <div class="image-block">
+                            <div class="content">
+                                <img src="{% static '/assets/forGirls.jpg' %}" alt="Image">
+                            </div>
+                            <div class="content back-content">
+                                <h3>Toys for girls</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua.</p>
+                                <a href="">See all products</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-box">
+                        <div class="image-block">
+                            <div class="content">
+                                <img src="{% static '/assets/medicalCategory.jpg' %}" alt="Image">
+                            </div>
+                            <div class="content back-content">
+                                <h3>Medicine for children</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua.</p>
+                                <a href="">See all products</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category-box">
+                        <div class="image-block">
+                            <div class="content">
+                                <img src="{% static '/assets/forBoys.jpg' %}" alt="Image">
+                            </div>
+                            <div class="content back-content">
+                                <h3>Toys for boys</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt
+                                    ut labore et dolore magna aliqua.</p>
+                                <a href="">See all products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="sellers">
+            <div class="sellers-content">
+                <div class="sellers-top">
+                    <div class="sellers-top-l">
+                        <div class="sellers-top-section">Our faves</div>
+                        <div class="sellers-top-title">Best sellers</div>
+                    </div>
+                    <div class="sellers-top-link"><a href="">View all</a></div>
+                </div>
+                <div class="sellers-bottom">
+                    <div class="sellers-box">
+                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
+                        </div>
+                        <div class="sellers-box-bottom">
+                            <div class="sellers-box-t">
+                                <div class="sellers-box-price">$18</div>
+                                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="sellers-box-b">
+                                <div class="sellers-box-title">Whirly Pop</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sellers-box">
+                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
+                        </div>
+                        <div class="sellers-box-bottom">
+                            <div class="sellers-box-t">
+                                <div class="sellers-box-price">$18</div>
+                                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="sellers-box-b">
+                                <div class="sellers-box-title">Whirly Pop</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sellers-box">
+                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
+                        </div>
+                        <div class="sellers-box-bottom">
+                            <div class="sellers-box-t">
+                                <div class="sellers-box-price">$18</div>
+                                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="sellers-box-b">
+                                <div class="sellers-box-title">Whirly Pop</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sellers-box">
+                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
+                        </div>
+                        <div class="sellers-box-bottom">
+                            <div class="sellers-box-t">
+                                <div class="sellers-box-price">$18</div>
+                                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="sellers-box-b">
+                                <div class="sellers-box-title">Whirly Pop</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="collection">
+            <div class="collection-content">
+                <div class="collection-top">
+                    <p>Made with love</p>
+                    <h2>Explore our collection </h2>
+                </div>
+                <div class="collection-bottom">
+                    <div class="collection-l">
+                        <div class="collection-l-img"
+                            style="background: url({% static '/assets/front-view-kid-playing-with-wooden-toyds.jpg' %});"></div>
+                        <div class="collection-bottom-title">Toys</div>
+                        <div class="collection-bottom-link"><a href="">Shop now</a></div>
+                    </div>
+                    <div class="collection-r">
+                        <div class="collection-r-img"
+                            style="background: url('{% static '/assets/top-view-arrangement-medical-elements.jpg' %}');"></div>
+                        <div class="collection-bottom-title">Media Equipment</div>
+                        <div class="collection-bottom-link"><a href="">Shop now</a></div>
+                        <img src="{% static '/assets/giraffe.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="whyus">
+            <div class="whyus-content">
+                <div class="whyus-block">
+                    <div class="whyus-info">
+                        <h2>Why Us?</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                        <a href="">All goods</a>
+                    </div>
+                    <div class="whyus-r">
+                        <div class="whyus-r-img"></div>
+                        <img src="{% static '/assets/giraffe2.png' %}" alt="giraffe">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="priority">
+        <div class="priority-items">
+            <div class="priority-item">
+                <img src="{% static '/assets/delivery-truck.png' %}" alt="priority">
+                <div class="priority-item-tite">Fast shipping</div>
+                <div class="priority-item-subtitle">Delivery within three to four working days</div>
+            </div>
+            <div class="priority-item">
+                <img src="{% static '/assets/trade.png' %}" alt="priority">
+                <div class="priority-item-tite">Affordable prices</div>
+                <div class="priority-item-subtitle">Quality Play, Affordable Wellness for Every Family.</div>
+            </div>
+            <div class="priority-item">
+                <img src="{% static '/assets/customer-service.png' %}" alt="priority">
+                <div class="priority-item-tite">Support</div>
+                <div class="priority-item-subtitle">Any question? We are happy to help you</div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'include/footer.html' %}
+{% endblock %}
