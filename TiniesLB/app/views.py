@@ -1,10 +1,9 @@
 from django.views.generic import TemplateView, DetailView
-from .models import Product
+from .models import Product, BrandCategory
 from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
 from django.http import JsonResponse
-from django.template.loader import render_to_string
 from django.shortcuts import render
 from django.db.models import Q
 
@@ -56,7 +55,6 @@ class AllProducts(TemplateView):
         context['unique_age_categories'] = unique_age
         context['search_query'] = search_query
 
-        print(unique_age, unique_brand)
         return context
 
 
@@ -71,6 +69,15 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
 
+        return context
+
+class BrandAll(TemplateView):
+    template_name = 'pages/all_brands.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_categories = BrandCategory.objects.all()
+        context['all_categories'] = all_categories
         return context
 
 

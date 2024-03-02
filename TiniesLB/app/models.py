@@ -27,6 +27,13 @@ class Color(models.Model):
     def __str__(self):
         return self.hex_code
 
+class BrandCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    background_image = models.ImageField(upload_to='category_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
 class Cart(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
     session_id = models.CharField(max_length=40, null=True, blank=True)

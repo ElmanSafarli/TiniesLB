@@ -525,7 +525,7 @@ body {
     margin: 26px 21px;
 }
 
-.sellers-box-price {
+.sellers-box-price, .sellers-box-dollar {
     color: #919191;
     font-size: 20px;
     font-style: normal;
@@ -1399,10 +1399,11 @@ body {
 
 .all-products-group{
     display: grid;
-grid-template-columns: repeat(4, 1fr);
-grid-template-rows: 1fr;
-grid-column-gap: 10px;
-grid-row-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    width: 100%;
 }
 
 /* Swiper filter */
@@ -1461,6 +1462,20 @@ grid-row-gap: 10px;
     font-size: 16px;
     color: #000;
     line-height: 36px;
+}
+
+/* All brands */
+.all-top {
+    background-color: #3B424C;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border-radius: 46px;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4%;
 }
 
 
@@ -1898,6 +1913,12 @@ grid-row-gap: 10px;
         width: 80%;
         margin: auto;
     }
+
+    /* Brands all */
+    .all-top {
+        border-radius: 24px;
+        height: 250px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -2184,13 +2205,15 @@ grid-row-gap: 10px;
     }
 
     .cart-total-price, .cart-total-count {
-        font-size: 16px;
+        font-size: 10px;
     }
-
+    .cart-total-price span{
+        font-size: 18px;
+    }
     .cart-bottom-cehkout {
         width: 100%;
         font-size: 14px;
-        height: 64px;
+        height: 58px;
     }
 
     .cart-bottom {
