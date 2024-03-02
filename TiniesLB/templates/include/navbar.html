@@ -15,7 +15,7 @@
                 </div>
                 <div class="nav-sb">
                     <div class="nav-search">
-                        <form action="">
+                        <form action="{% url 'all' %}" method="get">
                             <div class="container">
                                 <input checked="" class="checkbox" type="checkbox">
                                 <div class="mainbox">
@@ -27,7 +27,7 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    <input class="search_input" placeholder="search" type="text">
+                                    <input name="q" class="search_input" placeholder="search" type="text" value="{{ search_query }}">
                                 </div>
                             </div>
                         </form>

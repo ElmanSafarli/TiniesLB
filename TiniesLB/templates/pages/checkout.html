@@ -11,10 +11,10 @@
                 <form action="" id="checkout-form">
                     <div class="checkout-item">
                         <div class="checkout-title">Delivery</div>
-                        <div class="checkout-choose checkout-selected">Ship</div>
-                        <div class="checkout-choose checkout-nonSelected">Pick up</div>
+                        <div class="checkout-choose checkout-selected" id="ship">Ship</div>
+                        <div class="checkout-choose checkout-nonSelected" id="pick-up">Pick up</div>
                     </div>
-                    <div class="checkout-item">
+                    <div class="checkout-item" id="pickup-locations">
                         <div class="checkout-title">Pickup locations</div>
                         <div class="checkout-choose checkout-selected">Para Vida baby & kid showroom(free)</div>
                     </div>
@@ -30,13 +30,13 @@
                                 </div>
                                 <div class="checkout-input"><input type="text" placeholder="City" id="city" name="city" required></div>
                                 <div class="checkout-input"><input type="text" placeholder="Postal code" id="postal_code" name="postal_code" required></div>
-                                <div class="checkout-input fullC3"><input type="text" placeholder="Phone" id="phone" name="phone" required></div>
+                                <div class="checkout-input fullC3"><input type="number" placeholder="Phone" id="phone" name="phone" required></div>
                             </div>
 
                     </div>
                     <div class="checkout-item">
                         <div class="checkout-title">Payment</div>
-                        <div class="checkout-selected">Cash on Delivery (COD)</div>
+                        <div class="checkout-choose checkout-selected">Cash on Delivery (COD)</div>
                         <button id="checkout-btn" class="confirm-order-btn" type="submit">Complete order</button>
                     </div>
                 </form>
@@ -44,24 +44,13 @@
             <div class="checkout-r">
                 <div class="checkout-r-item">
                     <div class="checkout-title">Products</div>
-                    <div class="checkout-products">
-                        {% for product_info in cart_items %}
-                            <div class="checkout-product">
-                                <div class="checkout-product-img"><img src="{{ product_info.product.image1.url }}" alt="product"></div>
-                                <div class="checkout-product-r">
-                                    <div class="checkout-product-title">{{ product_info.product.header }}</div>
-                                    <div class="checkout-product-rb">
-                                        <div class="checkout-product-price">${{ product_info.product.price }}</div>
-                                        <div class="checkout-product-quantity">{{ product_info.quantity }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="checkout-products" id='selected-products'>
+
                     </div>
                 </div>
                 <div class="checkout-rb-item">
-                    <div class="checkout-title">Total</div>
-                    <div class="checkout-totalPrice">${{ total_price }}</div>
+                    <div class="checkout-title" >Total</div>
+                    <div class="checkout-totalPrice" id="total-price"></div>
                 </div>
             </div>
         </div>
