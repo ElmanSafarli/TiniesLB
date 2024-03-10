@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var itemName = item.name;
             var itemPrice = item.price;
             var itemQuantity = item.quantity;
-            var itemTotalPrice = itemPrice * itemQuantity;
+            var itemTotalPrice = (itemPrice * itemQuantity).toFixed(2);
             var itemColor = item.color;
             var itemImage = item.image;
 
@@ -195,21 +195,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="cart-table">
                     <div class="inline-detail">
                         <div class="cart-product-company">  ${itemColor ? `<div class="cart-product-color" style="box-shadow: 0 0 10px ${itemColor};">Color: ${itemColor}</div>` : ''}</div>
-                        <button class="delete-cart-item-btn" data-cart-item-id="${itemId}"></button>
+                        <button class="delete-cart-item-btn" data-cart-item-id="${itemId}">x</button>
                     </div>
                     <div class="cart-product-title">${itemName}</div>
                 </div>
                 <div class="cart-product-price">$${itemPrice}</div>
                 <div class="quantity-container cart-product-qty">
-                    <button class="quantity-btn cart-decrement-btn" data-cart-item-id="${itemId}"></button>
+                    <button class="quantity-btn cart-decrement-btn" data-cart-item-id="${itemId}">-</button>
                     <span class="quantity" id="cartCount_${itemId}">${itemQuantity}</span>
-                    <button class="quantity-btn cart-increment-btn" data-cart-item-id="${itemId}"></button>
+                    <button class="quantity-btn cart-increment-btn" data-cart-item-id="${itemId}">+</button>
                 </div>
                 <div class="cart-product-total cart-product-item-price">$${itemTotalPrice}</div>
             `;
             cartItemsList.appendChild(cartItemElement);
 
-            totalPrice += itemTotalPrice;
+            totalPrice += parseFloat(itemTotalPrice);
         }
 
         totalPriceElement.textContent = 'Total Price: $' + totalPrice;
