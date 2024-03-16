@@ -34,48 +34,55 @@
             <div class="category-content">
                 <div class="category-title">Categories features</div>
                 <div class="category-box-group">
-                    <div class="category-box">
-                        <div class="image-block">
-                            <div class="content">
-                                <img src="{% static '/assets/forGirls.jpg' %}" alt="Image">
-                            </div>
-                            <div class="content back-content">
-                                <h3>Toys for girls</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua.</p>
-                                <a href="{% url 'products_by_category' 'toys-for-girls' %}">See all products</a>
-                            </div>
+                    <article class="card">
+                      <div class="card-img">
+                        <div class="card-imgs pv delete"><img src="{% static '/assets/forGirls.jpg' %}" alt="Image"></div>
+                      </div>
+
+                      <div class="project-info">
+                        <div class="flex">
+                          <div class="project-title">Toys for girls</div>
+                          <span class="tag"><a href="{% url 'products_by_category' 'medicine-for-children' %}">All</a></span>
                         </div>
-                    </div>
-                    <div class="category-box">
-                        <div class="image-block">
-                            <div class="content">
-                                <img src="{% static '/assets/medicalCategory.jpg' %}" alt="Image">
-                            </div>
-                            <div class="content back-content">
-                                <h3>Medicine for children</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua.</p>
-                                <a href="{% url 'products_by_category' 'medicine-for-children' %}">See all products</a>
-                            </div>
+                        <span class="lighter"
+                          >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae
+                          voluptas ullam aut incidunt minima.</span
+                        >
+                      </div>
+                    </article>
+                    <article class="card">
+                      <div class="card-img">
+                        <div class="card-imgs pv delete"><img src="{% static '/assets/medicalCategory.jpg' %}" alt="Image"></div>
+                      </div>
+
+                      <div class="project-info">
+                        <div class="flex">
+                          <div class="project-title">Medicine for children</div>
+                          <span class="tag"><a href="{% url 'products_by_category' 'medicine-for-children' %}">All</a></span>
                         </div>
-                    </div>
-                    <div class="category-box">
-                        <div class="image-block">
-                            <div class="content">
-                                <img src="{% static '/assets/forBoys.jpg' %}" alt="Image">
-                            </div>
-                            <div class="content back-content">
-                                <h3>Toys for boys</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt
-                                    ut labore et dolore magna aliqua.</p>
-                                <a href="{% url 'products_by_category' 'toys-for-boys' %}">See all products</a>
-                            </div>
+                        <span class="lighter"
+                          >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae
+                          voluptas ullam aut incidunt minima.</span
+                        >
+                      </div>
+                    </article>
+                    <article class="card">
+                      <div class="card-img">
+                        <div class="card-imgs pv delete"><img src="{% static '/assets/forBoys.jpg' %}" alt="Image"></div>
+                      </div>
+
+                      <div class="project-info">
+                        <div class="flex">
+                          <div class="project-title">Toys for boys</div>
+                          <span class="tag"><a href="{% url 'products_by_category' 'toys-for-boys' %}">All</a></span>
                         </div>
-                    </div>
+                        <span class="lighter"
+                          >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae
+                          voluptas ullam aut incidunt minima.</span
+                        >
+                      </div>
+                    </article>
+
                 </div>
             </div>
         </div>

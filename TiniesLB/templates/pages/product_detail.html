@@ -57,16 +57,6 @@
                                     <span style="color: #FF0000;">OUT OF STOCK</span>
                                 {% endif %}
                             </div>
-<!--                            <div class="inline-detail product-qty">-->
-<!--                                <p>QTY:</p>-->
-<!--                                <div class="cart-product-quantity inline-detail">-->
-<!--                                    <button class="quantity-btn" data-type="decrease"><i-->
-<!--                                            class="fa-solid fa-minus"></i></button>-->
-<!--                                    <span class="quantity">1</span>-->
-<!--                                    <button class="quantity-btn" data-type="increase"><i-->
-<!--                                            class="fa-solid fa-plus"></i></button>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="inline-detail" style="margin-top: 14px;">
                                 <div class="product-price-detail">${{ product.price }}</div>
                                 <button class="add-cart-detail addToCartBtn" data-menu-item="{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i></button>
@@ -92,62 +82,24 @@
                 <div class="detail-most-like">
                     <h1>MORE FROM THIS COLLECTION</h1>
                     <div class="products-group">
-                        <div class="product-box">
-                            <div class="sellers-box-img"
-                                style="background: url(./assets/young-father-walking-with-baby-carriage-park.jpg);">
+                         {% for product in recent_products %}
+                        <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
+                            <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
                             </div>
                             <div class="sellers-box-bottom">
                                 <div class="sellers-box-t">
-                                    <div class="sellers-box-price">$18</div>
-                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
+
+                                    <div class="inline-detail"><span class="sellers-box-dollar">$</span><div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div></div>
+                                    <button class="addToCartBtn" data-menu-item="{{ product.id }}"><i
+                                            class="fa-solid fa-cart-shopping"></i></button>
                                 </div>
                                 <div class="sellers-box-b">
-                                    <div class="sellers-box-title">Whirly Pop</div>
+                                    <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a
+                                            href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="product-box">
-                            <div class="sellers-box-img"
-                                style="background: url(./assets/two-young-mothers-walking-autumn-park-with-carriages.jpg);">
-                            </div>
-                            <div class="sellers-box-bottom">
-                                <div class="sellers-box-t">
-                                    <div class="sellers-box-price">$18</div>
-                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
-                                </div>
-                                <div class="sellers-box-b">
-                                    <div class="sellers-box-title">Whirly Pop</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="sellers-box-img"
-                                style="background: url(./assets/young-mother-walking-autumn-park-with-carriage.jpg);">
-                            </div>
-                            <div class="sellers-box-bottom">
-                                <div class="sellers-box-t">
-                                    <div class="sellers-box-price">$38</div>
-                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
-                                </div>
-                                <div class="sellers-box-b">
-                                    <div class="sellers-box-title">Whirly wheel Test</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-box">
-                            <div class="sellers-box-img"
-                                style="background: url(./assets/young-mother-walking-with-baby-stroller-park.jpg);">
-                            </div>
-                            <div class="sellers-box-bottom">
-                                <div class="sellers-box-t">
-                                    <div class="sellers-box-price">$28</div>
-                                    <button><i class="fa-solid fa-cart-shopping"></i></button>
-                                </div>
-                                <div class="sellers-box-b">
-                                    <div class="sellers-box-title">Kunert - MILA</div>
-                                </div>
-                            </div>
-                        </div>
+                     {% endfor %}
                     </div>
                 </div>
             </div>

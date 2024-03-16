@@ -74,6 +74,10 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
 
+        # Get the four most recently added products
+        recent_products = Product.objects.order_by('-id')[:4]
+        context['recent_products'] = recent_products
+
         return context
 
 class AllCategory(TemplateView):
@@ -82,13 +86,52 @@ class AllCategory(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         all_categories = Category.objects.all()
+
         context['all_categories'] = all_categories
         return context
 
-def products_by_category(request, category_slug):
-    category = get_object_or_404(Category, slug=category_slug)
-    products = Product.objects.filter(category=category)
-    return render(request, 'pages/products_by_category.html', {'category': category, 'products': products})
+class ProductsByCategory(TemplateView):
+    template_name = 'pages/products_by_category.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_slug = kwargs.get('category_slug')
+        category = get_object_or_404(Category, slug=category_slug)
+        products = Product.objects.filter(category=category)
+
+        # Filter products
+        brand_filter = self.request.GET.get('brand')
+        age_filter = self.request.GET.get('age')
+        search_query = self.request.GET.get('q')
+
+        if brand_filter:
+            products = products.filter(product_brand=brand_filter)
+        if age_filter:
+            products = products.filter(age_category=age_filter)
+        if search_query:
+            products = products.filter(
+                Q(header__icontains=search_query) | Q(product_brand__icontains=search_query)
+            )
+
+            # Sorting functionality
+        sort_by = self.request.GET.get('sort_by')
+
+        if sort_by == 'price_asc':
+            products = products.order_by('price')
+        elif sort_by == 'price_desc':
+            products = products.order_by('-price')
+        elif sort_by == 'date_added':
+            products = products.order_by('-id')
+
+        context['unique_brands'] = Product.objects.values_list('product_brand', flat=True).distinct()
+        context['unique_age_categories'] = Product.objects.values_list('age_category', flat=True).distinct()
+        context['search_query'] = search_query
+        context['current_brand_filter'] = brand_filter  # Pass current filter to the template
+        context['current_age_filter'] = age_filter
+
+        context['category'] = category
+        context['products'] = products
+        return context
 
 class BrandAll(TemplateView):
     template_name = 'pages/all_brands.html'
