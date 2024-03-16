@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product,Color, BrandCategory
+from .models import Product,Color, BrandCategory, Category
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -9,10 +9,15 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
-    list_display = ('hex_code', )
-    search_fields = ('hex_code', )
+    list_display = ('color', )
+    search_fields = ('color', )
 
 @admin.register(BrandCategory)
 class AllBrandsAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    search_fields = ('name', )
+
+@admin.register(Category)
+class AllCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', )
     search_fields = ('name', )

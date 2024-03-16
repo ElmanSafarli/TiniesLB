@@ -289,6 +289,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (target.classList.contains('cart-decrement-btn')) {
                     if (currentQuantity > 1) {
                         updateCartItemQuantity(itemId, currentQuantity - 1);
+                    } else {
+                        removeFromCart(itemId); // Remove item if quantity becomes zero
                     }
                 } else {
                     updateCartItemQuantity(itemId, currentQuantity + 1);

@@ -1,0 +1,104 @@
+<!-- pages/all_products.html -->
+{% extends '_base.html' %}
+{% load static %}
+
+{% block body %}
+{% include 'include/navbar.html' %}
+
+<div id="hiddenBlock" class="hidden-block">
+    {% include 'include/cart.html' %}
+</div>
+
+<div class="all-products">
+    <div class="all-products-content">
+
+        <div class="all-filter">
+            <div class="all-filter-item">
+                <div class="all-filter-item-title">AGE</div>
+                <ul class="desktop-filter">
+                    {% for country in unique_age_categories %}
+                    <li><a href="?age={{ country }}">{{ country }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="swiper-container scrolling-container mobile-filter">
+                    <div class="swiper-wrapper">
+                        {% for country in unique_age_categories %}
+                        <div class="swiper-slide element"><a href="?age={{ country }}">{{ country }}</a></div>
+                        {% endfor %}
+                    </div>
+                </ul>
+            </div>
+            <div class="all-filter-item">
+                <div class="all-filter-item-title">BRANDS</div>
+                <ul class="desktop-filter">
+                    {% for industry in unique_brands %}
+                    <li><a href="?brand={{ industry }}">{{ industry }}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul class="swiper-container scrolling-container mobile-filter">
+                    <div class="swiper-wrapper">
+                        {% for industry in unique_brands %}
+                        <div class="swiper-slide element"><a href="?brand={{ industry }}">{{ industry }}</a></div>
+                        {% endfor %}
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+             <div class="sorting-buttons">
+                <label class="dropdown">
+                    <div class="dd-button">
+                          Sort products
+                    </div>
+
+                    <input type="checkbox" class="dd-input" id="test">
+
+                      <ul class="dd-menu">
+                        <li>
+                           <a href="?sort_by=price_asc{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">Low to High</a>
+                        </li>
+                        <li>
+                           <a href="?sort_by=price_desc{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">High to Low</a>
+                        </li>
+                        <li>
+                             <a href="?sort_by=date_added{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">Sort by Date Added</a>
+                        </li>
+                      </ul>
+
+                </label>
+
+            </div>
+
+            <div class="all-products-group">
+            {% for product in products %}
+            <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
+                <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
+                </div>
+                <div class="sellers-box-bottom">
+                    <div class="sellers-box-t">
+
+                        <div class="inline-detail"><span class="sellers-box-dollar">$</span><div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div></div>
+                        <button class="addToCartBtn" data-menu-item="{{ product.id }}"><i
+                                class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="sellers-box-b">
+                        <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a
+                                href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+{% include 'include/footer.html' %}
+
+{% endblock %}

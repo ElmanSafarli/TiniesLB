@@ -7,10 +7,9 @@
                 </div>
                 <div class="navbar-items">
                     <ul>
-                        <li><a href="">About Us</a></li>
                         <li><a href="{% url 'brand_categories' %}">Brands</a></li>
-                        <li><a href="">Toys</a></li>
-                        <li><a href="">Medical</a></li>
+                        <li><a href="{% url 'categories' %}">Categories</a></li>
+                        <li><a href="{% url 'all' %}">All companies</a></li>
                     </ul>
                 </div>
                 <div class="nav-sb">
@@ -54,9 +53,8 @@
                         <div class="sidebar-items">
                             <ul>
                                 <li><a href="{% url 'home' %}">Home</a></li>
-                                <li><a href="">About Us</a></li>
                                 <li><a href="{% url 'brand_categories' %}">Brands</a></li>
-                                <li><a href="">Contact Us</a></li>
+                                <li><a href="{% url 'categories' %}">categories</a></li>
                                 <li><a href="{% url 'all' %}">All companies</a></li>
                             </ul>
                         </div>

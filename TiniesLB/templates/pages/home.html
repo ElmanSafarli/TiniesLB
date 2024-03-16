@@ -44,7 +44,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt
                                     ut labore et dolore magna aliqua.</p>
-                                <a href="">See all products</a>
+                                <a href="{% url 'products_by_category' 'toys-for-girls' %}">See all products</a>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt
                                     ut labore et dolore magna aliqua.</p>
-                                <a href="">See all products</a>
+                                <a href="{% url 'products_by_category' 'medicine-for-children' %}">See all products</a>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt
                                     ut labore et dolore magna aliqua.</p>
-                                <a href="">See all products</a>
+                                <a href="{% url 'products_by_category' 'toys-for-boys' %}">See all products</a>
                             </div>
                         </div>
                     </div>
@@ -89,61 +89,27 @@
                         <div class="sellers-top-section">Our faves</div>
                         <div class="sellers-top-title">Best sellers</div>
                     </div>
-                    <div class="sellers-top-link"><a href="">View all</a></div>
+                    <div class="sellers-top-link"><a href="{% url 'brand_categories' %}">View all</a></div>
                 </div>
                 <div class="sellers-bottom">
-                    <div class="sellers-box">
-                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
-                        </div>
-                        <div class="sellers-box-bottom">
-                            <div class="sellers-box-t">
-                                <div class="sellers-box-price">$18</div>
-                                <button><i class="fa-solid fa-cart-shopping"></i></button>
+                     {% for product in recent_products %}
+                        <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
+                            <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
                             </div>
-                            <div class="sellers-box-b">
-                                <div class="sellers-box-title">Whirly Pop</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sellers-box">
-                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
-                        </div>
-                        <div class="sellers-box-bottom">
-                            <div class="sellers-box-t">
-                                <div class="sellers-box-price">$18</div>
-                                <button><i class="fa-solid fa-cart-shopping"></i></button>
-                            </div>
-                            <div class="sellers-box-b">
-                                <div class="sellers-box-title">Whirly Pop</div>
+                            <div class="sellers-box-bottom">
+                                <div class="sellers-box-t">
+
+                                    <div class="inline-detail"><span class="sellers-box-dollar">$</span><div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div></div>
+                                    <button class="addToCartBtn" data-menu-item="{{ product.id }}"><i
+                                            class="fa-solid fa-cart-shopping"></i></button>
+                                </div>
+                                <div class="sellers-box-b">
+                                    <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a
+                                            href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="sellers-box">
-                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
-                        </div>
-                        <div class="sellers-box-bottom">
-                            <div class="sellers-box-t">
-                                <div class="sellers-box-price">$18</div>
-                                <button><i class="fa-solid fa-cart-shopping"></i></button>
-                            </div>
-                            <div class="sellers-box-b">
-                                <div class="sellers-box-title">Whirly Pop</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sellers-box">
-                        <div class="sellers-box-img" style="background: url(./assets/fluffy-toy-texture-close-up.jpg);">
-                        </div>
-                        <div class="sellers-box-bottom">
-                            <div class="sellers-box-t">
-                                <div class="sellers-box-price">$18</div>
-                                <button><i class="fa-solid fa-cart-shopping"></i></button>
-                            </div>
-                            <div class="sellers-box-b">
-                                <div class="sellers-box-title">Whirly Pop</div>
-                            </div>
-                        </div>
-                    </div>
+                     {% endfor %}
                 </div>
             </div>
         </div>
@@ -186,7 +152,7 @@
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
-                        <a href="">All goods</a>
+                        <a href="{% url 'all' %}">All goods</a>
                     </div>
                     <div class="whyus-r">
                         <div class="whyus-r-img"></div>

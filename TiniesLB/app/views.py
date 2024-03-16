@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, DetailView
-from .models import Product, BrandCategory
+from django.shortcuts import get_object_or_404
+from .models import Product, BrandCategory, Category
 from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
@@ -10,6 +11,15 @@ from django.db.models import Q
 class HomePage(TemplateView):
     template_name = 'pages/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get the four most recently added products
+        recent_products = Product.objects.order_by('-id')[:4]
+        context['recent_products'] = recent_products
+
+        return context
+
 
 
 class AllProducts(TemplateView):
@@ -17,46 +27,41 @@ class AllProducts(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()
-
-        # Retrieve all products
         products = Product.objects.all()
+        filtered_products = products
 
-        # Get unique values for product brand and age category
-        unique_brand = products.values_list('product_brand', flat=True).distinct()
-        unique_age = products.values_list('age_category', flat=True).distinct()
-
-        # Get filters from query parameters
+        # Filter products
         brand_filter = self.request.GET.get('brand')
         age_filter = self.request.GET.get('age')
         search_query = self.request.GET.get('q')
 
-        print(brand_filter,age_filter)
-
-        # Apply filters
         if brand_filter:
             products = products.filter(product_brand=brand_filter)
         if age_filter:
             products = products.filter(age_category=age_filter)
-
-        # Apply search filter for both name and category
         if search_query:
             products = products.filter(
                 Q(header__icontains=search_query) | Q(product_brand__icontains=search_query)
             )
 
-        # Apply sorting
+            # Sorting functionality
         sort_by = self.request.GET.get('sort_by')
-        if sort_by:
-            products = products.order_by(sort_by)
+
+        if sort_by == 'price_asc':
+            products = products.order_by('price')
+        elif sort_by == 'price_desc':
+            products = products.order_by('-price')
+        elif sort_by == 'date_added':
+            products = products.order_by('-id')
 
         context['products'] = products
-        context['unique_brands'] = unique_brand
-        context['unique_age_categories'] = unique_age
+        context['unique_brands'] = Product.objects.values_list('product_brand', flat=True).distinct()
+        context['unique_age_categories'] = Product.objects.values_list('age_category', flat=True).distinct()
         context['search_query'] = search_query
+        context['current_brand_filter'] = brand_filter  # Pass current filter to the template
+        context['current_age_filter'] = age_filter
 
         return context
-
 
 
 class ProductDetail(DetailView):
@@ -70,6 +75,20 @@ class ProductDetail(DetailView):
         context['products'] = Product.objects.all()
 
         return context
+
+class AllCategory(TemplateView):
+    template_name = 'pages/all_category.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_categories = Category.objects.all()
+        context['all_categories'] = all_categories
+        return context
+
+def products_by_category(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    products = Product.objects.filter(category=category)
+    return render(request, 'pages/products_by_category.html', {'category': category, 'products': products})
 
 class BrandAll(TemplateView):
     template_name = 'pages/all_brands.html'

@@ -19,12 +19,27 @@
                             <ul>
                                  <li><button onclick="changeImage('{{ product.image1.url }}')"><img
                                             src="{{ product.image1.url }}" alt=""></button></li>
-                                <li><button onclick="changeImage('{{ product.image2.url }}')"><img
-                                            src="{{ product.image2.url }}" alt=""></button></li>
-                                <li><button onclick="changeImage('{{ product.image3.url }}')"><img
-                                            src="{{ product.image3.url }}" alt=""></button></li>
-                                <li><button onclick="changeImage('{{ product.image4.url }}')"><img
-                                            src="{{ product.image4.url }}" alt=""></button></li>
+                                {% if product.image2 %}
+                                <li>
+                                    <button onclick="changeImage('{{ product.image2.url }}')">
+                                        <img src="{{ product.image2.url }}" alt="">
+                                    </button>
+                                </li>
+                            {% endif %}
+                            {% if product.image3 %}
+                                <li>
+                                    <button onclick="changeImage('{{ product.image3.url }}')">
+                                        <img src="{{ product.image3.url }}" alt="">
+                                    </button>
+                                </li>
+                            {% endif %}
+                            {% if product.image4 %}
+                                <li>
+                                    <button onclick="changeImage('{{ product.image4.url }}')">
+                                        <img src="{{ product.image4.url }}" alt="">
+                                    </button>
+                                </li>
+                            {% endif %}
                             </ul>
                         </div>
                         <div class="detail-img-main">
@@ -60,7 +75,7 @@
                                 <h4>Available colors</h4>
                                 <div class="inline-detail">
                                     {% for color in product.colors.all %}
-                                        <div class="detail-color" style="background: #{{ color.hex_code }};"></div>
+                                        <div class="detail-color" style="background: {{ color.color }};"></div>
                                     {% endfor %}
                                 </div>
                             </div>

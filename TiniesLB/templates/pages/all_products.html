@@ -11,6 +11,7 @@
 
 <div class="all-products">
     <div class="all-products-content">
+
         <div class="all-filter">
             <div class="all-filter-item">
                 <div class="all-filter-item-title">AGE</div>
@@ -44,7 +45,32 @@
             </div>
         </div>
 
-        <div class="all-products-group">
+        <div style="width: 100%;">
+             <div class="sorting-buttons">
+                <label class="dropdown">
+                    <div class="dd-button">
+                          Sort products
+                    </div>
+
+                    <input type="checkbox" class="dd-input" id="test">
+
+                      <ul class="dd-menu">
+                        <li>
+                           <a href="?sort_by=price_asc{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">Low to High</a>
+                        </li>
+                        <li>
+                           <a href="?sort_by=price_desc{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">High to Low</a>
+                        </li>
+                        <li>
+                             <a href="?sort_by=date_added{% if current_brand_filter %}&brand={{ current_brand_filter }}{% endif %}{% if current_age_filter %}&age={{ current_age_filter }}{% endif %}">Sort by Date Added</a>
+                        </li>
+                      </ul>
+
+                </label>
+
+            </div>
+
+            <div class="all-products-group">
             {% for product in products %}
             <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
                 <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
@@ -64,6 +90,9 @@
             </div>
             {% endfor %}
         </div>
+
+        </div>
+
     </div>
 </div>
 
