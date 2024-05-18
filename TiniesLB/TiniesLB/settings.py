@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'colorfield',
 
     'app',
+
+    'import_export',
 ]
 
 MIDDLEWARE = [
