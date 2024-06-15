@@ -17,8 +17,8 @@
                     <div class="detail-img">
                         <div class="detail-img-more">
                             <ul>
-                                 <li><button onclick="changeImage('{{ product.image1.url }}')"><img
-                                            src="{{ product.image1.url }}" alt=""></button></li>
+                                 <li><button onclick="changeImage('{% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %}')"><img
+                                            src="{% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %}" alt="product"></button></li>
                                 {% if product.image2 %}
                                 <li>
                                     <button onclick="changeImage('{{ product.image2.url }}')">
@@ -43,7 +43,7 @@
                             </ul>
                         </div>
                         <div class="detail-img-main">
-                            <img id="mainImage" src="{{ product.image1.url }}" alt="">
+                            <img id="mainImage" src="{% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %}" alt="product">
                         </div>
                     </div>
                     <div class="product-info">
@@ -84,7 +84,7 @@
                     <div class="products-group">
                          {% for product in recent_products %}
                         <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
-                            <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
+                            <div class="sellers-box-img" style="background: url({% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %});">
                             </div>
                             <div class="sellers-box-bottom">
                                 <div class="sellers-box-t">
