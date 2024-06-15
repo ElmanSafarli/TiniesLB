@@ -26,5 +26,6 @@ class AllBrandsAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class AllCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
+    list_display = ('id', 'name', )
+    prepopulated_fields = {'slug' : ( 'name',)}
+    search_fields = ('id', 'name', )

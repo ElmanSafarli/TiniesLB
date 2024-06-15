@@ -101,7 +101,8 @@
                 <div class="sellers-bottom">
                      {% for product in recent_products %}
                         <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
-                            <div class="sellers-box-img" style="background: url({{ product.image1.url }});">
+                            <div class="sellers-box-img"
+                                 style="background: url({% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %});">
                             </div>
                             <div class="sellers-box-bottom">
                                 <div class="sellers-box-t">

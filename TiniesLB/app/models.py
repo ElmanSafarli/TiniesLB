@@ -17,19 +17,19 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    header = models.CharField(max_length=255)
+    header = models.CharField(max_length=255, blank=True, null=True)
     slug = models.SlugField(unique=True, max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    image1 = models.ImageField(upload_to='product_images/')
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    image1 = models.ImageField(upload_to='product_images/', blank=True, null=True)
     image2 = models.ImageField(upload_to='product_images/', blank=True, null=True)
     image3 = models.ImageField(upload_to='product_images/', blank=True, null=True)
     image4 = models.ImageField(upload_to='product_images/', blank=True, null=True)
-    description = models.TextField()
-    company_name = models.CharField(max_length=255)
-    product_brand = models.CharField(max_length=255)
-    age_category = models.CharField(max_length=20)
+    description = models.TextField(blank=True, null=True)
+    company_name = models.CharField(max_length=255, blank=True, null=True)
+    product_brand = models.CharField(max_length=255, blank=True, null=True)
+    age_category = models.CharField(max_length=20, blank=True, null=True)
     in_stock = models.BooleanField(default=True)
-    colors = models.ManyToManyField('Color', blank=True)
+    colors = models.ManyToManyField('Color', blank=True, null=True)
 
 
     def save(self, *args, **kwargs):
