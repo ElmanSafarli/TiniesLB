@@ -56,6 +56,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const checkOutBtn = document.getElementById('.checkout-btn');
     const checkOutForm = document.getElementById('checkout-form')
 
+    const openConfirmationButtons = document.querySelectorAll('.open-confirmation-popup');
+    const cancelButtons = document.querySelectorAll('.cancel-add-to-cart');
+
+    if (openConfirmationButtons) {
+        openConfirmationButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const productId = button.getAttribute('data-menu-item');
+                const popup = document.getElementById(`confirmation-popup-${productId}`);
+                popup.style.display = 'block';
+            });
+        });
+
+        cancelButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const popup = button.closest('.popup');
+                popup.style.display = 'none';
+            });
+        });
+    }
 
     if (shipOption & pickUpOption & pickupLocations) {
         shipOption.addEventListener('click', function () {
@@ -220,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var itemId = button.getAttribute('data-menu-item');
             var itemName, itemPrice, itemColor, itemImage;
 
+
             // Check if the button is on the product detail page
             var productDetail = button.closest('.product-info');
             if (productDetail) {
@@ -239,6 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 itemImage = document.querySelector('.detail-img-main img').getAttribute('src');
+
             } else {
                 // Assume the button is on the all products page
                 var productBox = button.closest('.product-box');
@@ -250,6 +271,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add to cart if both item name and price are valid
             if (itemName && itemPrice) {
                 addToCart(itemId, itemName, itemPrice, itemColor, itemImage);
+                const popup = document.getElementById(`confirmation-popup-${itemId}`);
+                popup.style.display = 'none';
             } else {
                 console.error('Failed to add item to cart. Item name or price is missing.');
             }
