@@ -1,16 +1,20 @@
 from django.views.generic import TemplateView, DetailView
 from django.shortcuts import get_object_or_404
-from .models import Product, BrandCategory, Category
+from .models import Product, Category
 from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.db.models import Q
+from django.core.paginator import Paginator
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+
 
 class HomePage(TemplateView):
     template_name = 'pages/home.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -18,17 +22,19 @@ class HomePage(TemplateView):
         recent_products = Product.objects.order_by('-id')[:4]
         context['recent_products'] = recent_products
 
+        all_categories = Category.objects.order_by('-id')[:4]
+        context['all_categories'] = all_categories
+
         return context
 
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class AllProducts(TemplateView):
     template_name = 'pages/all_products.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = Product.objects.all()
-        filtered_products = products
 
         # Filter products
         brand_filter = self.request.GET.get('brand')
@@ -54,12 +60,18 @@ class AllProducts(TemplateView):
         elif sort_by == 'date_added':
             products = products.order_by('-id')
 
+        # Pagination
+        paginator = Paginator(products, 16) 
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context['products'] = products
         context['unique_brands'] = Product.objects.values_list('product_brand', flat=True).distinct()
         context['unique_age_categories'] = Product.objects.values_list('age_category', flat=True).distinct()
         context['search_query'] = search_query
-        context['current_brand_filter'] = brand_filter  # Pass current filter to the template
+        context['current_brand_filter'] = brand_filter 
         context['current_age_filter'] = age_filter
+        context['page_obj'] = page_obj
 
         return context
 
@@ -113,7 +125,7 @@ class ProductsByCategory(TemplateView):
                 Q(header__icontains=search_query) | Q(product_brand__icontains=search_query)
             )
 
-            # Sorting functionality
+        # Sorting functionality
         sort_by = self.request.GET.get('sort_by')
 
         if sort_by == 'price_asc':
@@ -123,23 +135,19 @@ class ProductsByCategory(TemplateView):
         elif sort_by == 'date_added':
             products = products.order_by('-id')
 
+        # Pagination
+        paginator = Paginator(products, 10)  # Show 10 products per page.
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context['unique_brands'] = Product.objects.values_list('product_brand', flat=True).distinct()
         context['unique_age_categories'] = Product.objects.values_list('age_category', flat=True).distinct()
         context['search_query'] = search_query
-        context['current_brand_filter'] = brand_filter  # Pass current filter to the template
+        context['current_brand_filter'] = brand_filter  
         context['current_age_filter'] = age_filter
 
         context['category'] = category
-        context['products'] = products
-        return context
-
-class BrandAll(TemplateView):
-    template_name = 'pages/all_brands.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        all_categories = BrandCategory.objects.all()
-        context['all_categories'] = all_categories
+        context['page_obj'] = page_obj
         return context
 
 

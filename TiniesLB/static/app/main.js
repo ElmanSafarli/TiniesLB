@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const shopingCart = document.querySelector('.shopping-cart');
     const cartQtyController = document.querySelector('.cart-items-list');
 
-    const checkOutBtn = document.getElementById('.checkout-btn');
     const checkOutForm = document.getElementById('checkout-form')
 
     const openConfirmationButtons = document.querySelectorAll('.open-confirmation-popup');
@@ -329,19 +328,6 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevent the default form submission
             sendTelegramData(); // Call your function to send data to Telegram
         });
-    }
-
-
-    function isDataValid() {
-        var contactName = document.getElementById('first_name').value;
-        var contactSurname = document.getElementById('last_name').value;
-        var contactNumber = document.getElementById('phone').value;
-        var contactAddress = document.getElementById('address').value;
-        var contactApartment = document.getElementById('apartment').value;
-        var contactCity = document.getElementById('city').value;
-        var contactPostalCode = document.getElementById('postal_code').value;
-
-        return contactName.trim() !== '' && contactNumber.trim() !== '';
     }
 
     function sendTelegramData() {

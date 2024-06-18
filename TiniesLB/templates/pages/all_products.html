@@ -71,28 +71,48 @@
             </div>
 
             <div class="all-products-group">
-            {% for product in products %}
-                <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
-                    <div class="sellers-box-img" style="background: url({% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %});"> </div>
-                    <div class="sellers-box-bottom">
-                        <div class="sellers-box-t">
-                            <div class="inline-detail"><span class="sellers-box-dollar">$</span><div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div></div>
-                            <button id="confirm-add-to-cart" class="open-confirmation-popup" data-menu-item="{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i></button>
+                {% for product in page_obj %}
+                    <div class="product-box menu-item" data-menu-item-id="{{ product.id }}">
+                        <div class="sellers-box-img" style="background: url({% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %});"> </div>
+                        <div class="sellers-box-bottom">
+                            <div class="sellers-box-t">
+                                <div class="inline-detail"><span class="sellers-box-dollar">$</span><div class="sellers-box-price" data-menu-item-price="{{ product.price }}">{{ product.price }}</div></div>
+                                <button id="confirm-add-to-cart" class="open-confirmation-popup" data-menu-item="{{ product.id }}"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </div>
+                            <div class="sellers-box-b">
+                                <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
+                            </div>
                         </div>
-                        <div class="sellers-box-b">
-                            <div class="sellers-box-title" data-menu-item-name="{{ product.header }}"><a href="{% url 'product_detail' slug=product.slug %}">{{ product.header }}</a></div>
+                        <div id="confirmation-popup-{{ product.id }}" class="popup">
+                            <div class="popup-content">
+                                <p>Are you sure you want to add this item to the cart?</p>
+                                <button class="addToCartBtn popup-btn" data-menu-item="{{ product.id }}">Yes</button>
+                                <button class="popup-btn cancel-add-to-cart">No</button>
+                            </div>
                         </div>
                     </div>
-                    <div id="confirmation-popup-{{ product.id }}" class="popup">
-                        <div class="popup-content">
-                            <p>Are you sure you want to add this item to the cart?</p>
-                            <button class="addToCartBtn popup-btn" data-menu-item="{{ product.id }}">Yes</button>
-                            <button class="popup-btn cancel-add-to-cart">No</button>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class="pagination-link" href="?page=1{% if request.GET.age %}&age={{ request.GET.age }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}">&laquo; first</a>
+                        <a class="pagination-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.age %}&age={{ request.GET.age }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}">previous</a>
+                    {% endif %}
+
+                    <span class="current-page">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a class="pagination-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.age %}&age={{ request.GET.age }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}">next</a>
+                        <a class="pagination-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.age %}&age={{ request.GET.age }}{% endif %}{% if request.GET.brand %}&brand={{ request.GET.brand }}{% endif %}{% if request.GET.sort_by %}&sort_by={{ request.GET.sort_by }}{% endif %}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+
 
         </div>
 

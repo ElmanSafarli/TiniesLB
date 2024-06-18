@@ -24,10 +24,30 @@
                         <a href="{% url 'all' %}">Explore our products</a>
                     </div>
                 </div>
-                <div class="header-img"><img src="{% static '/assets/giraffe-header.png' %}" alt="girrafe"></div>
+                <div class="header-img"><img src="{% static '/assets/giraffe-header.png' %}" alt="girrafe" loading="lazy"></div>
             </div>
         </div>
     </header>
+
+    <section>
+        <div class="categories-home">
+            <div class="sellers-top">
+                <div class="sellers-top-l">
+                        <div class="sellers-top-section">Our categories</div>
+                        <div class="sellers-top-title">Best categories</div>
+                    </div>
+                    <div class="sellers-top-link"><a href="{% url 'all' %}">View all</a></div>
+                </div>
+                <div class="sellers-bottom">
+                    {% for category in all_categories %}
+                        <div class="all-top"
+                            style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url({% if product.image1 %}{{ product.image1.url }}{% else %}{% static 'assets/fluffy-toy-texture-close-up.jpg' %}{% endif %}) ;">
+                            <a href="{% url 'products_by_category' category.slug %}"><h1>{{ category.name }}</h1></a>
+                        </div>
+                    {% endfor %} 
+                </div>
+            </div>
+    </section>
 
     <section>
         <div class="sellers">
@@ -37,7 +57,7 @@
                         <div class="sellers-top-section">Our faves</div>
                         <div class="sellers-top-title">Best sellers</div>
                     </div>
-                    <div class="sellers-top-link"><a href="{% url 'brand_categories' %}">View all</a></div>
+                    <div class="sellers-top-link"><a href="{% url 'all' %}">View all</a></div>
                 </div>
                 <div class="sellers-bottom">
                      {% for product in recent_products %}
@@ -82,7 +102,7 @@
                     </div>
                     <div class="whyus-r">
                         <div class="whyus-r-img"></div>
-                        <img src="{% static '/assets/giraffe2.png' %}" alt="giraffe">
+                        <img src="{% static '/assets/giraffe2.png' %}" alt="giraffe" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -92,17 +112,17 @@
     <div class="priority">
         <div class="priority-items">
             <div class="priority-item">
-                <img src="{% static '/assets/delivery-truck.png' %}" alt="priority">
+                <img src="{% static '/assets/delivery-truck.png' %}" alt="priority" loading="lazy">
                 <div class="priority-item-tite">Fast shipping</div>
                 <div class="priority-item-subtitle">Delivery within three to four working days</div>
             </div>
             <div class="priority-item">
-                <img src="{% static '/assets/trade.png' %}" alt="priority">
+                <img src="{% static '/assets/trade.png' %}" alt="priority" loading="lazy">
                 <div class="priority-item-tite">Affordable prices</div>
                 <div class="priority-item-subtitle">Quality Play, Affordable Wellness for Every Family.</div>
             </div>
             <div class="priority-item">
-                <img src="{% static '/assets/customer-service.png' %}" alt="priority">
+                <img src="{% static '/assets/customer-service.png' %}" alt="priority" loading="lazy">
                 <div class="priority-item-tite">Support</div>
                 <div class="priority-item-subtitle">Any question? We are happy to help you</div>
             </div>
